@@ -1,1 +1,62 @@
+Includes:
+https://github.com/open-source-parsers/jsoncpp
+https://github.com/leethomason/tinyxml2
 
+Usage:
+
+Pre-setup:
+1.Extract contents of “script.pkg” in Worldoftanksdir/res/packages/scripts.pkg (you can use following: WinRAR or make an copy of script.pkg and rename to script.zip) directly to Worldoftanksdir/res/ folder.
+For now it is crucial step in order to get tool working.
+
+2. Get files from here "https://github.com/ztyzbb/WOT-Tank-Information-Creater/tree/master/Publish"
+Following files:
+"msgunfmt.exe"
+"wottoolslib.exe"
+"libintl-8.dll"
+"libiconv-2.dll"
+"libgettextsrc-0-19-7.dll"
+"libgettextlib-0-19-7.dll"
+"libgcc_s_dw2-1.dll"
+
+3. put files with my application 
+
+4. Run the tool (all output files will be at same location there executable was launched in separate folders)
+
+it will generate:
+>output proceeds .po
+>>XMLoutput proceeds .xml
+>>>JSONoutput generates .json
+
+that being said,
+Outputs multiple:
+nation_vechiele.mo
+nation_vechiele.xml
+nation.json
+
+while for example from Czech(.json) nation) :
+{
+        "Hidden": "false", // is tank not in game ? [from .xml files]
+        "Type": "LT",      // lt for light tanks, mt medium tanks, ht heavy tanks, td tank destroyers , spg artillery [from .xml files]
+        "codename": "Cz06_Kolohousenka", // [from .xml files] modified output before writing
+        "description": "Cz06_Kolohousenka_descr", // [from .xml files]
+        "nationId": "czech", // Nation name and .json file name, is set based on "caught" folder name
+        "premium": "false",  // Does vehicle cost gold ? [from .xml files]
+        "price": "0",	     // [from .xml files] if it is not premium set to true, then it cost in silver else in gold
+        "shortUserString": "Cz06_Kolohousenka_short",  // [from .xml files]
+        "tankid": "0",	// [from .xml files]  modified to tankid instead of id before writing
+        "tier": "1",	// [from .xml files]  modified to tier instead of levels before writing
+        "vehicle": "Kolohousenka" // [from .mo/.po files] reading string from codename and checking if codename exist in .mo/.po files if so pick up near name (msgir)
+}
+
+Inspired by https://github.com/ztyzbb/WOT-Tank-Information-Creater/tree/master -- note that I rewritten from scratch.
+Built on C++20
+
+3rd tools:
+msgunfmt (compiled) https://www.gnu.org/software/gettext/
+wottoolslib (compiled) https://github.com/ztyzbb/WOT-Tank-Information-Creater/tree/master/wottoolslib
+
+3rd libraries used:
+Jsnocpp
+tinxyml2
+
+if you get error "File system error: directory_iterator::directory_iterator: unknown error: " -- check if world of tanks directory existing at printed location.
